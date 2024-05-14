@@ -1,6 +1,15 @@
 import { useState } from "react"
 
-function PersonalInfo({onNext}){
+
+
+function PersonalInfo({CV, onNext}){
+
+    const personnalInfo = {}
+
+    function submitPersonalInfo(){
+        console.log(personnalInfo);
+        onNext();
+    }
 
     return (
 
@@ -8,21 +17,28 @@ function PersonalInfo({onNext}){
             <h4>Personal Info</h4>
             <form>
                 <label htmlFor="name">First and Last Name</label>
-                <input id="name" type="text"required ></input>
+                <input id="name" type="text"required onChange={(e) =>{
+                    personnalInfo.name = e.target.value;
+                }}></input>
                 
                 <label htmlFor="contactNo">Contact no.</label>
-                <input id="ContactNo" type = "number" required ></input>
+                <input id="contactNo" type = "number" required onChange={(e)=> {
+                    personnalInfo.contactNo = e.target.value;
+                }}></input>
 
                 
                 <label htmlFor="email">Email</label>
-                <input id="email" type= "email" required ></input>
+                <input id="email" type= "email" required onChange={(e) => {
+                    personnalInfo.email = e.target.value;
+                }} ></input>
 
                 
                 <label htmlFor="address">Address</label>
-                <input id="address" type="text" ></input>
+                <input id="address" type="text" onChange={(e) => {
+                    personnalInfo.address = e.target.value;
+                }} ></input>
 
-                <button type="button" onClick={onNext} >Next</button>
-
+                <button type="button" onClick={submitPersonalInfo} >Next</button>
             </form>
         </div>
 
@@ -30,7 +46,7 @@ function PersonalInfo({onNext}){
 
 }
 
-function WorkHistory({onNext}){
+function WorkHistory({CV, onNext}){
     return (
 
         <div className="formDiv workInfoForm">
@@ -59,7 +75,7 @@ function WorkHistory({onNext}){
     )
 }
 
-function Education({onNext}){
+function Education({CV, onNext}){
     return (
 
         <div className="formDiv educationInfoForm">
@@ -88,16 +104,16 @@ function Education({onNext}){
 }
 
 
-function CreateForm(){
+function CreateForm(CV){
 
     const [activeForm, setActiveForm] = useState(0);
 
     return (
         <>
             {
-                activeForm === 0 ? <PersonalInfo onNext={() =>setActiveForm(1)}></PersonalInfo> 
-             :  activeForm === 1 ? <WorkHistory onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education onNext={() => setActiveForm(0)}></Education> : null
+                activeForm === 0 ? <PersonalInfo CV= {CV} onNext={() =>setActiveForm(1)}></PersonalInfo> 
+             :  activeForm === 1 ? <WorkHistory CV= {CV} onNext={() => setActiveForm(2)}></WorkHistory> 
+             :  activeForm === 2 ? <Education CV= {CV} onNext={() => setActiveForm(0)}></Education> : null
             
             }
         </>

@@ -6,6 +6,12 @@ import CustomizeForm from './HeaderButton/customizeForm';
 import './App.css'
 
 function App() {
+
+  const CV = {personnalInfo: {},
+              workHistory: [],
+              education: []
+            };
+
   const [activePage, setActivePage] = useState(0);
 
     return (
@@ -25,7 +31,7 @@ function App() {
                     setActivePage(2);
                 }}
             ></HeaderButton>
-            {activePage === 1 ? <CreateForm></CreateForm>: activePage === 2 ? <CustomizeForm></CustomizeForm>: null}
+            {activePage === 1 ? <CreateForm CV={CV}></CreateForm>: activePage === 2 ? <CustomizeForm></CustomizeForm>: null}
         </header>
     )
 }

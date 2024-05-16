@@ -7,9 +7,9 @@ import './App.css'
 
 function App() {
 
-  const CV = {personnalInfo: {},
-              workHistory: [],
-              education: []
+  const CV = {personalInfo: {},
+              workHistoryInfo: [],
+              educationInfo: []
             };
 
   const [activePage, setActivePage] = useState(0);

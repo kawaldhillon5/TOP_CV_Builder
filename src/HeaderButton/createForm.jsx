@@ -1,13 +1,14 @@
 import { useState } from "react"
+import PersonalInfo from "../CV-Class/personalInfo-class";
+import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
+import EducationInfo from "../CV-Class/educationInfo_class";
 
+function PersonalInfoComponent({CV, onNext}){
 
-
-function PersonalInfo({CVPersonalInfo, onNext}){
-
-    const personalInfo = {}
+    const personalInfo = new PersonalInfo();
 
     function submitPersonalInfo(){
-        CVPersonalInfo = {...CVPersonalInfo , 1 : personalInfo};
+        CV.setPersonalInfo(personalInfo);
         onNext();
     }
 
@@ -46,7 +47,7 @@ function PersonalInfo({CVPersonalInfo, onNext}){
 
 }
 
-function WorkHistory({CVWorkHistoryInfo, onNext}){
+function WorkHistory({CV, onNext}){
 
     const workHistoryInfo = {};
     const workHistoryInfoArray = CVWorkHistoryInfo;
@@ -93,7 +94,7 @@ function WorkHistory({CVWorkHistoryInfo, onNext}){
     )
 }
 
-function Education({CVEducationInfo, onNext}){
+function Education({CV, onNext}){
 
     const educationInfo = {};
     const educationInfoArray = CVEducationInfo;
@@ -146,9 +147,9 @@ function CreateForm(CV){
     return (
         <>
             {
-                activeForm === 0 ? <PersonalInfo CV= {CV.personalInfo} onNext={() =>setActiveForm(1)}></PersonalInfo> 
-             :  activeForm === 1 ? <WorkHistory CV= {CV.WorkHistoryInfo} onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education CV= {CV.educationInfo} onNext={() => setActiveForm(0)}></Education> : null
+                activeForm === 0 ? <PersonalInfoComponent CV= {CV} onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
+             :  activeForm === 1 ? <WorkHistory CV= {CV} onNext={() => setActiveForm(2)}></WorkHistory> 
+             :  activeForm === 2 ? <Education CV= {CV} onNext={() => setActiveForm(0)}></Education> : null
             
             }
         </>

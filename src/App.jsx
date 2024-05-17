@@ -2,16 +2,12 @@ import { useState } from 'react'
 import HeaderButton from './HeaderButton/HeaderButton';
 import CreateForm from './HeaderButton/createForm';
 import CustomizeForm from './HeaderButton/customizeForm';
-
+import { cv } from './CV-Class/CV-instance';
 import './App.css'
 
 function App() {
 
-  const CV = {personalInfo: {},
-              workHistoryInfo: [],
-              educationInfo: []
-            };
-
+  const [CV, setCv] = useState(cv);
   const [activePage, setActivePage] = useState(0);
 
     return (

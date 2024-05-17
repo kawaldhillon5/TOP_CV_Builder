@@ -1,4 +1,4 @@
-class CV {
+export default class CV {
 
     constructor(CVObject){
         if(CVObject){
@@ -18,4 +18,8 @@ class CV {
         return {personalInfo : this.personalInfo,workHistoryInfo : this.workHistoryInfo, educationInfo : this.educationInfo};
     }
 
+    setPersonalInfo(info){
+        this.personalInfo = info;
+    }
 }
+

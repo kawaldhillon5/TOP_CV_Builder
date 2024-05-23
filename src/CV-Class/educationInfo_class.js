@@ -11,4 +11,5 @@ export default class EducationInfo{
     getEducationInfo(){
         return {programeName : this.programeName, institutionName: this.institutionName, address: this.address, startDate: this.startDate, endDate: this.endDate, otherInfo: this.otherInfo}
     }
+
 }

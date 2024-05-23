@@ -9,8 +9,8 @@ export default class CV {
 
         } else {
             this.personalInfo = {};
-            this.workHistoryInfo = [];
-            this.educationInfo = [];
+            this.workHistoryInfo = {};
+            this.educationInfo = {};
         }
     }
 

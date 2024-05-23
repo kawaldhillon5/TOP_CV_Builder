@@ -2,13 +2,17 @@ import { useState } from "react"
 import PersonalInfo from "../CV-Class/personalInfo-class";
 import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
 import EducationInfo from "../CV-Class/educationInfo_class";
+import { cv } from "../CV-Class/CV-instance";
 
-function PersonalInfoComponent({CV, onNext}){
+function PersonalInfoComponent({personalInfoChange, onNext}){
 
-    const personalInfo = new PersonalInfo();
+
+    // const [personalInfoData, setData] = useState(personalInfo);
+
+    const personalInfo = new PersonalInfo()
 
     function submitPersonalInfo(){
-        CV.setPersonalInfo(personalInfo);
+        personalInfoChange(personalInfo);
         onNext();
     }
 
@@ -47,13 +51,11 @@ function PersonalInfoComponent({CV, onNext}){
 
 }
 
-function WorkHistory({CV, onNext}){
+function WorkHistory({workHistoryInfoChange, onNext}){
 
-    const workHistoryInfo = {};
-    const workHistoryInfoArray = CVWorkHistoryInfo;
+    const workHistoryInfo = new WorkHistoryInfo();
     function submitWorkHistory(){
-        workHistoryInfoArray.push(workHistoryInfo);
-        CVWorkHistoryInfo = workHistoryInfoArray;
+        workHistoryInfoChange(workHistoryInfo);
         onNext();
 
     }
@@ -94,13 +96,12 @@ function WorkHistory({CV, onNext}){
     )
 }
 
-function Education({CV, onNext}){
+function Education({educationInfoChange, onNext}){
 
-    const educationInfo = {};
-    const educationInfoArray = CVEducationInfo;
+    const educationInfo = new EducationInfo();
     function submitEducationInfo(){
-        educationInfoArray.push(educationInfo);
-        CVEducationInfo = educationInfoArray;
+        
+        educationInfoChange(educationInfo);
         onNext();
     }
 
@@ -140,16 +141,30 @@ function Education({CV, onNext}){
 }
 
 
-function CreateForm(CV){
+function CreateForm(props){
+
+    const {handlePersonalInfoChange, handleWorkHistoryInfoChange, handleEducationInfoChange, logCV} = props;
 
     const [activeForm, setActiveForm] = useState(0);
+    const personalInfoChange = (data)=>{
+        handlePersonalInfoChange(data);
+    }
+
+    const workHistoryInfoChange = (data) => {
+        handleWorkHistoryInfoChange(data);
+    }
+
+    const educationInfoChange = (data) =>{
+        handleEducationInfoChange(data);
+    }
+
 
     return (
         <>
             {
-                activeForm === 0 ? <PersonalInfoComponent CV= {CV} onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
-             :  activeForm === 1 ? <WorkHistory CV= {CV} onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education CV= {CV} onNext={() => setActiveForm(0)}></Education> : null
+                activeForm === 0 ? <PersonalInfoComponent personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
+             :  activeForm === 1 ? <WorkHistory workHistoryInfoChange = {workHistoryInfoChange}  onNext={() => setActiveForm(2)}></WorkHistory> 
+             :  activeForm === 2 ? <Education educationInfoChange = {educationInfoChange} onNext={() => logCV()}></Education> : null
             
             }
         </>

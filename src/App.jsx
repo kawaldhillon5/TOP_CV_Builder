@@ -7,9 +7,21 @@ import './App.css'
 
 function App() {
 
-  const [CV, setCv] = useState(cv);
   const [activePage, setActivePage] = useState(0);
+  const [CV, setCV] = useState(cv);
 
+  const handlePersonalInfoChange = (personalInfoData) => {
+    setCV({...CV, personalInfo: personalInfoData});
+  }
+  
+  const handleWorkHistoryInfoChange = (workHistoryInfoData) => {
+    setCV({...CV, workHistoryInfo: workHistoryInfoData});
+  }
+
+  
+  const handleEducationInfoChange = (educationInfoData) => {
+    setCV({...CV, educationInfo: educationInfoData});
+  }
     return (
         <header className='header'>
             <h2>CV Builder</h2>
@@ -27,7 +39,14 @@ function App() {
                     setActivePage(2);
                 }}
             ></HeaderButton>
-            {activePage === 1 ? <CreateForm CV={CV}></CreateForm>: activePage === 2 ? <CustomizeForm></CustomizeForm>: null}
+            {activePage === 1 ? <CreateForm 
+                handlePersonalInfoChange={handlePersonalInfoChange}
+                handleWorkHistoryInfoChange={handleWorkHistoryInfoChange}
+                handleEducationInfoChange={handleEducationInfoChange}
+                logCV = {()=>console.log(CV)}
+            ></CreateForm>: activePage === 2 ? <CustomizeForm>
+
+            </CustomizeForm>: null}
         </header>
     )
 }

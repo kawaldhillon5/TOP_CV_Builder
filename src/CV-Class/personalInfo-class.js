@@ -9,4 +9,5 @@ export default class PersonalInfo {
     getPersonalInfo(){
         return {name : this.name, contactNo : this.contactNo, email : this.email, address : this.address};
     }
+
 }

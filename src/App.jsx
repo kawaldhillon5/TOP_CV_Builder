@@ -2,8 +2,9 @@ import { useState } from 'react'
 import HeaderButton from './HeaderButton/HeaderButton';
 import CreateForm from './HeaderButton/createForm';
 import CustomizeForm from './HeaderButton/customizeForm';
-import { cv } from './CV-Class/CV-instance';
 import './App.css'
+import CvPreview from './CVPreview/CvPreview';
+import { cv } from './CV-Class/CV-instance';
 
 function App() {
 
@@ -18,36 +19,41 @@ function App() {
     setCV({...CV, workHistoryInfo: workHistoryInfoData});
   }
 
-  
   const handleEducationInfoChange = (educationInfoData) => {
     setCV({...CV, educationInfo: educationInfoData});
   }
     return (
-        <header className='header'>
-            <h2>CV Builder</h2>
-            <HeaderButton 
-                title = "Create"
-                isActive={activePage === 1}
-                set={() => {
-                    setActivePage(1);
-                }}
-            ></HeaderButton>
-            <HeaderButton
-                title = "Customize"
-                isActive={activePage === 2}
-                set={() => {
-                    setActivePage(2);
-                }}
-            ></HeaderButton>
+        <page>
+            <header className='header'>
+                <h2>CV Builder</h2>
+                <HeaderButton 
+                    title = "Create"
+                    isActive={activePage === 1}
+                    set={() => {
+                        setActivePage(1);
+                    }}
+                ></HeaderButton>
+                <HeaderButton
+                    title = "Customize"
+                    isActive={activePage === 2}
+                    set={() => {
+                        setActivePage(2);
+                    }}
+                ></HeaderButton>
+            </header>
+            <buttoncontent>
             {activePage === 1 ? <CreateForm 
-                handlePersonalInfoChange={handlePersonalInfoChange}
-                handleWorkHistoryInfoChange={handleWorkHistoryInfoChange}
-                handleEducationInfoChange={handleEducationInfoChange}
-                logCV = {()=>console.log(CV)}
-            ></CreateForm>: activePage === 2 ? <CustomizeForm>
+                    handlePersonalInfoChange={handlePersonalInfoChange}
+                    handleWorkHistoryInfoChange={handleWorkHistoryInfoChange}
+                    handleEducationInfoChange={handleEducationInfoChange}
+                    logCV = {()=>console.log(CV)}
+                    CV={CV}
+                ></CreateForm>: activePage === 2 ? <CustomizeForm>
 
-            </CustomizeForm>: null}
-        </header>
+                </CustomizeForm>: null}
+            </buttoncontent>
+            <CvPreview CV={CV}></CvPreview>
+        </page> 
     )
 }
 

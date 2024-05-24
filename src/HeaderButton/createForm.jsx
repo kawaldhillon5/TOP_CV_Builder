@@ -4,15 +4,14 @@ import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
 import EducationInfo from "../CV-Class/educationInfo_class";
 import { cv } from "../CV-Class/CV-instance";
 
-function PersonalInfoComponent({personalInfoChange, onNext}){
+function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
 
     // const [personalInfoData, setData] = useState(personalInfo);
 
-    const personalInfo = new PersonalInfo()
 
     function submitPersonalInfo(){
-        personalInfoChange(personalInfo);
+        // personalInfoChange(personalInfo);
         onNext();
     }
 
@@ -23,24 +22,24 @@ function PersonalInfoComponent({personalInfoChange, onNext}){
             <form>
                 <label htmlFor="name">First and Last Name</label>
                 <input id="name" type="text"required onChange={(e) =>{
-                    personalInfo.name = e.target.value;
+                    personalInfoChange({...personalInfo, name: e.target.value});
                 }}></input>
                 
                 <label htmlFor="contactNo">Contact no.</label>
                 <input id="contactNo" type = "number" required onChange={(e)=> {
-                    personalInfo.contactNo = e.target.value;
+                    personalInfoChange({...personalInfo, contactNo : e.target.value});
                 }}></input>
 
                 
                 <label htmlFor="email">Email</label>
                 <input id="email" type= "email" required onChange={(e) => {
-                    personalInfo.email = e.target.value;
+                    personalInfoChange({...personalInfo, email: e.target.value});
                 }} ></input>
 
                 
                 <label htmlFor="address">Address</label>
                 <input id="address" type="text" onChange={(e) => {
-                    personalInfo.address = e.target.value;
+                    personalInfoChange({...personalInfo, address : e.target.value});
                 }} ></input>
 
                 <button type="button" onClick={submitPersonalInfo} >Next</button>
@@ -123,7 +122,7 @@ function Education({educationInfoChange, onNext}){
                 
                 <label htmlFor="startDateEdu">Start Date</label>
                 <input id="startDateEdu" type= "date" required onChange={(e) =>{
-                    educationInfo.startdate = e.target.value;
+                    educationInfo.startDate = e.target.value;
                 }}></input>
 
                 
@@ -132,7 +131,7 @@ function Education({educationInfoChange, onNext}){
                     educationInfo.endDate = e.target.value;
                 }}></input>
 
-                <button type="button" onClick={submitEducationInfo} >Next</button>
+                <button type="button" onClick={submitEducationInfo} >Create</button>
 
             </form>
         </div>
@@ -143,7 +142,7 @@ function Education({educationInfoChange, onNext}){
 
 function CreateForm(props){
 
-    const {handlePersonalInfoChange, handleWorkHistoryInfoChange, handleEducationInfoChange, logCV} = props;
+    const {handlePersonalInfoChange, handleWorkHistoryInfoChange, handleEducationInfoChange, logCV, CV} = props;
 
     const [activeForm, setActiveForm] = useState(0);
     const personalInfoChange = (data)=>{
@@ -162,9 +161,10 @@ function CreateForm(props){
     return (
         <>
             {
-                activeForm === 0 ? <PersonalInfoComponent personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
+                activeForm === 0 ? <PersonalInfoComponent personalInfo={CV.personalInfo} personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
              :  activeForm === 1 ? <WorkHistory workHistoryInfoChange = {workHistoryInfoChange}  onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education educationInfoChange = {educationInfoChange} onNext={() => logCV()}></Education> : null
+             :  activeForm === 2 ? <Education educationInfoChange = {educationInfoChange} onNext={() => {logCV(); setActiveForm(3)}}></Education>
+             :  activeForm === 3 ? <></> : null
             
             }
         </>

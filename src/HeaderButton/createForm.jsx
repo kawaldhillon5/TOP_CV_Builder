@@ -6,12 +6,7 @@ import { cv } from "../CV-Class/CV-instance";
 
 function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
-
-    // const [personalInfoData, setData] = useState(personalInfo);
-
-
     function submitPersonalInfo(){
-        // personalInfoChange(personalInfo);
         onNext();
     }
 
@@ -50,11 +45,9 @@ function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
 }
 
-function WorkHistory({workHistoryInfoChange, onNext}){
+function WorkHistory({workHistoryInfo ,workHistoryInfoChange, onNext}){
 
-    const workHistoryInfo = new WorkHistoryInfo();
     function submitWorkHistory(){
-        workHistoryInfoChange(workHistoryInfo);
         onNext();
 
     }
@@ -66,25 +59,25 @@ function WorkHistory({workHistoryInfoChange, onNext}){
             <form>
                 <label htmlFor="title">Job Title</label>
                 <input id="title" type = "text" required onChange={(e) => {
-                    workHistoryInfo.title = e.target.value;
+                    workHistoryInfoChange({...workHistoryInfo, title: e.target.value})
                 }}></input>
 
                 <label htmlFor="companyName">Company Name</label>
                 <input id="companyName" type="text"required onChange={(e) =>{
-                    workHistoryInfo.companyName = e.target.value;
+                    workHistoryInfoChange({...workHistoryInfo,companyName: e.target.value});
                 }} ></input>
                 
 
                 
                 <label htmlFor="startDateWork">Start Date</label>
                 <input id="startDateWork" type= "date" required onChange={(e) =>{
-                    workHistoryInfo.startDate = e.target.value;
+                    workHistoryInfoChange({...workHistoryInfo,startDate: e.target.value});
                 }}></input>
 
                 
                 <label htmlFor="endDateWork">End Date</label>
                 <input id="endDateWork" type="date" required onChange={(e) => {
-                    workHistoryInfo.endDate = e.target.value;
+                    workHistoryInfoChange({...workHistoryInfo,endDate: e.target.value});
                 }}></input>
 
                 <button type="button" onClick={submitWorkHistory} >Next</button>
@@ -95,12 +88,10 @@ function WorkHistory({workHistoryInfoChange, onNext}){
     )
 }
 
-function Education({educationInfoChange, onNext}){
+function Education({educationInfo ,educationInfoChange, onNext}){
 
-    const educationInfo = new EducationInfo();
     function submitEducationInfo(){
         
-        educationInfoChange(educationInfo);
         onNext();
     }
 
@@ -111,24 +102,24 @@ function Education({educationInfoChange, onNext}){
             <form>
                 <label htmlFor="programeName">Programe Name</label>
                 <input id="programeName" type="text"required onChange={(e) =>{
-                    educationInfo.programeName = e.target.value;
+                    educationInfoChange({...educationInfo,programeName : e.target.value});
                 }}></input>
                 
                 <label htmlFor="institutionName">Institution Name</label>
                 <input id="institutionName" type = "text" required onChange={(e) =>{
-                    educationInfo.institutionName = e.target.value;
+                    educationInfoChange({...educationInfo,institutionName : e.target.value});
                 }}></input>
 
                 
                 <label htmlFor="startDateEdu">Start Date</label>
                 <input id="startDateEdu" type= "date" required onChange={(e) =>{
-                    educationInfo.startDate = e.target.value;
+                    educationInfoChange({...educationInfo,startDate : e.target.value});
                 }}></input>
 
                 
                 <label htmlFor="endDateEdu">End Date</label>
                 <input id="endDateEdu" type="date" required onChange={(e) =>{
-                    educationInfo.endDate = e.target.value;
+                    educationInfoChange({...educationInfo,endDate : e.target.value});
                 }}></input>
 
                 <button type="button" onClick={submitEducationInfo} >Create</button>
@@ -162,8 +153,8 @@ function CreateForm(props){
         <>
             {
                 activeForm === 0 ? <PersonalInfoComponent personalInfo={CV.personalInfo} personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
-             :  activeForm === 1 ? <WorkHistory workHistoryInfoChange = {workHistoryInfoChange}  onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education educationInfoChange = {educationInfoChange} onNext={() => {logCV(); setActiveForm(3)}}></Education>
+             :  activeForm === 1 ? <WorkHistory workHistoryInfo={CV.workHistoryInfo} workHistoryInfoChange = {workHistoryInfoChange}  onNext={() => setActiveForm(2)}></WorkHistory> 
+             :  activeForm === 2 ? <Education educationInfo={CV.educationInfo} educationInfoChange = {educationInfoChange} onNext={() => {logCV(); setActiveForm(3)}}></Education>
              :  activeForm === 3 ? <></> : null
             
             }

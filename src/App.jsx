@@ -25,7 +25,7 @@ function App() {
     return (
         <page>
             <header className='header'>
-                <h2>CV Builder</h2>
+                <h2 className='headerTitle'>CV Builder</h2>
                 <HeaderButton 
                     title = "Create"
                     isActive={activePage === 1}
@@ -41,18 +41,20 @@ function App() {
                     }}
                 ></HeaderButton>
             </header>
-            <buttoncontent>
-            {activePage === 1 ? <CreateForm 
-                    handlePersonalInfoChange={handlePersonalInfoChange}
-                    handleWorkHistoryInfoChange={handleWorkHistoryInfoChange}
-                    handleEducationInfoChange={handleEducationInfoChange}
-                    logCV = {()=>console.log(CV)}
-                    CV={CV}
-                ></CreateForm>: activePage === 2 ? <CustomizeForm>
+            <div className='content'>
+                <buttoncontent className="buttonContentDiv">
+                {activePage === 1 ? <CreateForm 
+                        handlePersonalInfoChange={handlePersonalInfoChange}
+                        handleWorkHistoryInfoChange={handleWorkHistoryInfoChange}
+                        handleEducationInfoChange={handleEducationInfoChange}
+                        logCV = {()=>console.log(CV)}
+                        CV={CV}
+                    ></CreateForm>: activePage === 2 ? <CustomizeForm>
 
-                </CustomizeForm>: null}
-            </buttoncontent>
-            <CvPreview CV={CV}></CvPreview>
+                    </CustomizeForm>: null}
+                </buttoncontent>
+                <CvPreview CV={CV}></CvPreview>
+            </div>
         </page> 
     )
 }

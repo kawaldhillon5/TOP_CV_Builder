@@ -1,0 +1,32 @@
+.personalInfoForm, .workInfoForm, .educationInfoForm{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    /* height: 60vh; */
+    width: auto;
+    justify-content: space-around;
+    gap: 6vh;
+}
+
+.inputDiv{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    gap: 10px;
+}
+
+input{
+    width: 35vw;
+    border: none;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+}
+
+.nextButton{
+    font-family: sans-serif;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    margin-left: auto;
+}

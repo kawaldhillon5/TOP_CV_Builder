@@ -1,7 +1,7 @@
 function HeaderButton({title, set, isActive}) {
     return (
         <button
-            className={"headerButton" + " " + (isActive ? "headerButtonActive" : "")}
+            className={"headerButton" + " " + (isActive ? "headerButtonActive" : "") + " " +`button${title}`}
             onClick={set}
         >
             {title}    

@@ -1,0 +1,39 @@
+.livePreviewDiv{
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4fr 4fr;
+    background-color: aliceblue;
+    max-height: 80vh;
+}
+
+.personalInfoPreview{
+    background-color: rgb(198, 226, 255);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr;
+    justify-items: center;
+}
+
+.workInfoPreview, .educationInfoPreview{
+    padding: 40px;
+}
+
+.personalName{
+    grid-area: 1/1/1/3 ;
+}
+
+.personalAddress{
+    grid-area: 3/1/3/3;
+}
+
+.personalEmail{
+    margin-left: auto;
+    margin-right: 1vw;
+}
+
+.personalContact{
+    margin-left: 1vw;
+    margin-right: auto;
+}

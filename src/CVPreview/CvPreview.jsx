@@ -1,17 +1,18 @@
 import PersonalInfo from "../CV-Class/personalInfo-class";
-
+import "./CVPreview.css"
 export default function CvPreview({CV}){
 
 
     return (
-        <livepreviewdiv>
-            <personalinfodiv>
-                <h2>{CV.personalInfo.name}</h2>
-                <div>{CV.personalInfo.contactNo}</div>
-                <div>{CV.personalInfo.email}</div>
-                <div>{CV.personalInfo.address}</div>
+        <livepreviewdiv className="livePreviewDiv">
+            <personalinfodiv className="personalInfoPreview">
+                <h2 className="personalName">{CV.personalInfo.name}</h2>
+                <div className="personalEmail">{CV.personalInfo.email}</div>
+                <div className="personalContact">{CV.personalInfo.contactNo}</div>
+                <div className="personalAddress">{CV.personalInfo.address}</div>
             </personalinfodiv>
-            <workhistoryinfodiv>
+            <workhistoryinfodiv className="workInfoPreview">
+                <h2>Work Experience</h2>
                 <h2>{CV.workHistoryInfo.title}</h2>
                 <div>{CV.workHistoryInfo.companyName}</div>
                 <div>{CV.workHistoryInfo.address}</div>
@@ -19,7 +20,8 @@ export default function CvPreview({CV}){
                 <div>{CV.workHistoryInfo.endDate}</div>
                 <div>{CV.workHistoryInfo.otherInfo}</div>
             </workhistoryinfodiv>
-            <educationinfodiv>
+            <educationinfodiv className="educationInfoPreview">
+                <h2>Education</h2>
                 <h2>{CV.educationInfo.programeName}</h2>
                 <div>{CV.educationInfo.institutionName}</div>
                 <div>{CV.educationInfo.address}</div>

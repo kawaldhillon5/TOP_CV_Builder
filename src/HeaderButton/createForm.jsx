@@ -3,6 +3,7 @@ import PersonalInfo from "../CV-Class/personalInfo-class";
 import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
 import EducationInfo from "../CV-Class/educationInfo_class";
 import { cv } from "../CV-Class/CV-instance";
+import "./createForm.css"
 
 function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
@@ -12,32 +13,40 @@ function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
     return (
 
-        <div className="formDiv personalInfoForm">
-            <h4>Personal Info</h4>
-            <form>
-                <label htmlFor="name">First and Last Name</label>
-                <input id="name" type="text"required onChange={(e) =>{
-                    personalInfoChange({...personalInfo, name: e.target.value});
-                }}></input>
+        <div className="formDiv">
+            <h2>Personal Info</h2>
+            <form className="personalInfoForm">
+                    <div className="nameInput inputDiv">
+                        <label htmlFor="name">First and Last Name</label>
+                        <input id="name" type="text"required onChange={(e) =>{
+                            personalInfoChange({...personalInfo, name: e.target.value});
+                        }}></input>
+                    </div>
                 
-                <label htmlFor="contactNo">Contact no.</label>
-                <input id="contactNo" type = "number" required onChange={(e)=> {
-                    personalInfoChange({...personalInfo, contactNo : e.target.value});
-                }}></input>
+                <div className="contactInput inputDiv">
+                    <label htmlFor="contactNo">Contact no.</label>
+                    <input id="contactNo" type = "number" required onChange={(e)=> {
+                        personalInfoChange({...personalInfo, contactNo : e.target.value});
+                    }}></input>
+                </div>
 
                 
-                <label htmlFor="email">Email</label>
-                <input id="email" type= "email" required onChange={(e) => {
-                    personalInfoChange({...personalInfo, email: e.target.value});
-                }} ></input>
+                <div className="emailInput inputDiv">
+                    <label htmlFor="email">Email</label>
+                    <input id="email" type= "email" required onChange={(e) => {
+                        personalInfoChange({...personalInfo, email: e.target.value});
+                    }} ></input>
+                </div>
 
                 
-                <label htmlFor="address">Address</label>
-                <input id="address" type="text" onChange={(e) => {
-                    personalInfoChange({...personalInfo, address : e.target.value});
-                }} ></input>
+                <div className="addressInput inputDiv">
+                    <label htmlFor="address">Address</label>
+                    <input id="address" type="text" onChange={(e) => {
+                        personalInfoChange({...personalInfo, address : e.target.value});
+                    }} ></input>
+                </div>
 
-                <button type="button" onClick={submitPersonalInfo} >Next</button>
+                <button className="nextButton" type="button" onClick={submitPersonalInfo} >Next</button>
             </form>
         </div>
 
@@ -54,33 +63,41 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, onNext}){
 
     return (
 
-        <div className="formDiv workInfoForm">
+        <div className="formDiv ">
             <h4>Work History</h4>
-            <form>
-                <label htmlFor="title">Job Title</label>
-                <input id="title" type = "text" required onChange={(e) => {
-                    workHistoryInfoChange({...workHistoryInfo, title: e.target.value})
-                }}></input>
+            <form className="workInfoForm">
+                <div className="workTitle inputDiv">
+                    <label htmlFor="title">Job Title</label>
+                    <input id="title" type = "text" required onChange={(e) => {
+                        workHistoryInfoChange({...workHistoryInfo, title: e.target.value})
+                    }}></input>
+                </div>
 
-                <label htmlFor="companyName">Company Name</label>
-                <input id="companyName" type="text"required onChange={(e) =>{
-                    workHistoryInfoChange({...workHistoryInfo,companyName: e.target.value});
-                }} ></input>
+                <div className="workCompany inputDiv">
+                    <label htmlFor="companyName">Company Name</label>
+                    <input id="companyName" type="text"required onChange={(e) =>{
+                        workHistoryInfoChange({...workHistoryInfo,companyName: e.target.value});
+                    }} ></input>
+                </div>
                 
 
                 
-                <label htmlFor="startDateWork">Start Date</label>
-                <input id="startDateWork" type= "date" required onChange={(e) =>{
-                    workHistoryInfoChange({...workHistoryInfo,startDate: e.target.value});
-                }}></input>
+                <div className="workStart inputDiv">
+                    <label htmlFor="startDateWork">Start Date</label>
+                    <input id="startDateWork" type= "date" required onChange={(e) =>{
+                        workHistoryInfoChange({...workHistoryInfo,startDate: e.target.value});
+                    }}></input>
+                </div>
 
                 
-                <label htmlFor="endDateWork">End Date</label>
-                <input id="endDateWork" type="date" required onChange={(e) => {
-                    workHistoryInfoChange({...workHistoryInfo,endDate: e.target.value});
-                }}></input>
+                <div className="workEnd inputDiv">
+                    <label htmlFor="endDateWork">End Date</label>
+                    <input id="endDateWork" type="date" required onChange={(e) => {
+                        workHistoryInfoChange({...workHistoryInfo,endDate: e.target.value});
+                    }}></input>
+                </div>
 
-                <button type="button" onClick={submitWorkHistory} >Next</button>
+                <button className="nextButton" type="button" onClick={submitWorkHistory} >Next</button>
 
             </form>
         </div>
@@ -97,32 +114,40 @@ function Education({educationInfo ,educationInfoChange, onNext}){
 
     return (
 
-        <div className="formDiv educationInfoForm">
+        <div className="formDiv">
             <h4>Education</h4>
-            <form>
-                <label htmlFor="programeName">Programe Name</label>
-                <input id="programeName" type="text"required onChange={(e) =>{
-                    educationInfoChange({...educationInfo,programeName : e.target.value});
-                }}></input>
+            <form className="educationInfoForm">
+                <div className="educationName inputDiv">
+                    <label htmlFor="programeName">Programe Name</label>
+                    <input id="programeName" type="text"required onChange={(e) =>{
+                        educationInfoChange({...educationInfo,programeName : e.target.value});
+                    }}></input>
+                </div>
                 
-                <label htmlFor="institutionName">Institution Name</label>
-                <input id="institutionName" type = "text" required onChange={(e) =>{
-                    educationInfoChange({...educationInfo,institutionName : e.target.value});
-                }}></input>
+                <div className="educationInstitution inputDiv">
+                    <label htmlFor="institutionName">Institution Name</label>
+                    <input id="institutionName" type = "text" required onChange={(e) =>{
+                        educationInfoChange({...educationInfo,institutionName : e.target.value});
+                    }}></input>
+                </div>
 
                 
-                <label htmlFor="startDateEdu">Start Date</label>
-                <input id="startDateEdu" type= "date" required onChange={(e) =>{
-                    educationInfoChange({...educationInfo,startDate : e.target.value});
-                }}></input>
+                <div className="educationStart inputDiv">
+                    <label htmlFor="startDateEdu">Start Date</label>
+                    <input id="startDateEdu" type= "date" required onChange={(e) =>{
+                        educationInfoChange({...educationInfo,startDate : e.target.value});
+                    }}></input>
+                </div>
 
                 
-                <label htmlFor="endDateEdu">End Date</label>
-                <input id="endDateEdu" type="date" required onChange={(e) =>{
-                    educationInfoChange({...educationInfo,endDate : e.target.value});
-                }}></input>
+                <div className="educationEnd inputDiv">
+                    <label htmlFor="endDateEdu">End Date</label>
+                    <input id="endDateEdu" type="date" required onChange={(e) =>{
+                        educationInfoChange({...educationInfo,endDate : e.target.value});
+                    }}></input>
+                </div>
 
-                <button type="button" onClick={submitEducationInfo} >Create</button>
+                <button className="nextButton" type="button" onClick={submitEducationInfo} >Create</button>
 
             </form>
         </div>

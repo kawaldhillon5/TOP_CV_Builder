@@ -26,6 +26,10 @@
     max-height: 80vh;
 }
 
+.NoContent > .livePreviewDiv {
+    margin: 50px;
+}
+
 .formDiv{
     display: flex;
     flex-direction: column;

@@ -1,7 +1,5 @@
 import { useState } from "react"
-import PersonalInfo from "../CV-Class/personalInfo-class";
-import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
-import EducationInfo from "../CV-Class/educationInfo_class";
+
 import { cv } from "../CV-Class/CV-instance";
 import "./createForm.css"
 
@@ -158,28 +156,57 @@ function Education({educationInfo ,educationInfoChange, onNext}){
 
 function CreateForm(props){
 
-    const {handlePersonalInfoChange, handleWorkHistoryInfoChange, handleEducationInfoChange, logCV, CV} = props;
+    const {handlePersonalInfoObjectChange,
+           handleWorkHistoryInfoObjectChange,
+           handleEducationInfoObjectChange,
+           handleWorkHistoryInfoAdd,
+           handleWorkHistoryInfoDelete,
+           handleEducationInfoAdd,
+           handleEducationInfoDelete,
+           personalInfoObject,
+           workHistoryInfoArray,
+           educationInfoArray, logCV, set} = props;
 
     const [activeForm, setActiveForm] = useState(0);
     const personalInfoChange = (data)=>{
-        handlePersonalInfoChange(data);
+        handlePersonalInfoObjectChange(data);
     }
 
-    const workHistoryInfoChange = (data) => {
-        handleWorkHistoryInfoChange(data);
+    const workHistoryInfoChange = (data, id) => {
+        handleWorkHistoryInfoObjectChange(data);
     }
 
-    const educationInfoChange = (data) =>{
-        handleEducationInfoChange(data);
+    const educationInfoChange = (data, id) =>{
+        handleEducationInfoObjectChange(data);
+    }
+
+    const workHistoryAdd = (data) =>{
+        handleWorkHistoryInfoAdd(data);
+    }
+
+    const workHistoryDelete = (id)=>{
+        handleWorkHistoryInfoDelete(id);
+    }
+
+    const educationAdd = (data)=>{
+        handleEducationInfoAdd(data);
+    }
+
+    const educationDelete = (id)=>{
+        handleEducationInfoDelete(id)
+    }
+
+    const setPage = () =>{
+        set();
     }
 
 
     return (
         <>
             {
-                activeForm === 0 ? <PersonalInfoComponent personalInfo={CV.personalInfo} personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
-             :  activeForm === 1 ? <WorkHistory workHistoryInfo={CV.workHistoryInfo} workHistoryInfoChange = {workHistoryInfoChange}  onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education educationInfo={CV.educationInfo} educationInfoChange = {educationInfoChange} onNext={() => {logCV(); setActiveForm(3)}}></Education>
+                activeForm === 0 ? <PersonalInfoComponent personalInfo={personalInfoObject} personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
+             :  activeForm === 1 ? <WorkHistory workHistoryInfo={workHistoryInfoArray} workHistoryInfoChange = {workHistoryInfoChange} workHistoryAdd={handleWorkHistoryInfoAdd} workHistoryDelete={handleWorkHistoryInfoDelete}  onNext={() => setActiveForm(2)}></WorkHistory> 
+             :  activeForm === 2 ? <Education educationInfo={educationInfoArray} educationInfoChange = {educationInfoChange} educationAdd={handleEducationInfoAdd} educationDelete={handleEducationInfoDelete} onNext={() => {logCV(); setActiveForm(3); setPage()}}></Education>
              :  activeForm === 3 ? <></> : null
             
             }

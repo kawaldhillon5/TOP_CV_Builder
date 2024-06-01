@@ -6,6 +6,7 @@ export default class WorkHistoryInfo {
       this.startDate = startDate;
       this.endDate = endDate;
       this.otherInfo = otherInfo;
+      this.id = crypto.randomUUID();
     }
 
     getWorkHistoryInfo(){

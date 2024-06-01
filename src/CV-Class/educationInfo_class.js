@@ -6,6 +6,7 @@ export default class EducationInfo{
         this.startDate = startDate;
         this.endDate = endDate;
         this.otherInfo = otherInfo;
+        this.id = crypto.randomUUID();
     }
 
     getEducationInfo(){

@@ -1,6 +1,5 @@
 import PersonalInfo from "../CV-Class/personalInfo-class";
-import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
-import EducationInfo from "../CV-Class/educationInfo_class";
+
 export default class CV {
 
     constructor(CVObject){
@@ -12,8 +11,8 @@ export default class CV {
 
         } else {
             this.personalInfo = new PersonalInfo();
-            this.workHistoryInfo = new WorkHistoryInfo();
-            this.educationInfo = new EducationInfo();
+            this.workHistoryInfo = []
+            this.educationInfo = [];
         }
     }
 }

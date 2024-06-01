@@ -47,16 +47,18 @@ function App() {
     }));
   }
 
-  const handleWorkHistoryInfoAdd = (workHistoryInfoData) =>{
+  const handleWorkHistoryInfoSave = (workHistoryInfoData) =>{
     const array = workHistoryInfoArray;
-    array.push({data: workHistoryInfoData, id : workHistoryInfoArray.length});
+    array.push(workHistoryInfoData);
     setWorkHistoryInfo(array);
   }
 
   const handleWorkHistoryInfoDelete = (id) => {
-    const array = workHistoryInfoArray;
-    array.splice(id,1);
-    setWorkHistoryInfo(array.map((item, index) =>{return {...item, id : index}}));
+    setWorkHistoryInfo(workHistoryInfoArray.map(object =>{
+      if(object != id){
+        return object;
+      }
+    }));
   }
 
   const handleEducationInfoObjectChange = (educationInfoData, id) =>{
@@ -69,16 +71,19 @@ function App() {
     }));
   }
 
-  const handleEducationInfoAdd = (educationInfoData) =>{
+  const handleEducationInfoSave = (educationInfoData) =>{
     const array = educationInfoArray;
-    array.push({data: educationInfoData, id : educationInfoArray.length});
+    array.push(educationInfoData);
     setEducationInfo(array);
   }
 
   const handleEducationInfoDelete = (id) => {
-    const array = educationInfoArray;
-    array.splice(id,1);
-    setEducationInfo(array.map((item, index) =>{return {...item, id : index}}));
+    
+    setEducationInfo(educationInfoArray.map((object)=>{
+      if(object != id){
+        return object;
+      }
+    }));
   }
 
 
@@ -115,10 +120,10 @@ function App() {
                         workHistoryInfoArray={workHistoryInfoArray}
                         educationInfoArray={educationInfoArray}
                         handlePersonalInfoObjectChange={handlePersonalInfoObjectChange}
-                        handleWorkHistoryInfoAdd={handleWorkHistoryInfoAdd}
+                        handleWorkHistoryInfoSave={handleWorkHistoryInfoSave}
                         handleWorkHistoryInfoObjectChange={handleWorkHistoryInfoObjectChange}
                         handleWorkHistoryInfoDelete={handleWorkHistoryInfoDelete}
-                        handleEducationInfoAdd={handleEducationInfoAdd}
+                        handleEducationInfoSave={handleEducationInfoSave}
                         handleEducationInfoObjectChange={handleEducationInfoObjectChange}
                         handleEducationInfoDelete={handleEducationInfoDelete}
                         set={()=>setActivePage(0)}
@@ -126,7 +131,7 @@ function App() {
 
                     </CustomizeForm>: null}
                 </buttoncontent>
-                <CvPreview CV={CV}></CvPreview>
+                {/* <CvPreview CV={personalInfoObject, workHistoryInfoArray, educationInfoArray}></CvPreview> */}
             </div>
         </page> 
     )

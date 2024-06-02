@@ -48,17 +48,19 @@ function App() {
   }
 
   const handleWorkHistoryInfoSave = (workHistoryInfoData) =>{
-    const array = workHistoryInfoArray;
+    const array = workHistoryInfoArray.slice();
     array.push(workHistoryInfoData);
     setWorkHistoryInfo(array);
   }
 
   const handleWorkHistoryInfoDelete = (id) => {
-    setWorkHistoryInfo(workHistoryInfoArray.map(object =>{
-      if(object != id){
+    const array = [];
+    workHistoryInfoArray.map(object =>{
+      if(!(object.id == id)){
         return object;
       }
-    }));
+    });
+    setWorkHistoryInfo(array);
   }
 
   const handleEducationInfoObjectChange = (educationInfoData, id) =>{
@@ -72,18 +74,19 @@ function App() {
   }
 
   const handleEducationInfoSave = (educationInfoData) =>{
-    const array = educationInfoArray;
+    const array = educationInfoArray.slice();
     array.push(educationInfoData);
     setEducationInfo(array);
   }
 
   const handleEducationInfoDelete = (id) => {
-    
-    setEducationInfo(educationInfoArray.map((object)=>{
-      if(object != id){
-        return object;
+    const array = [];
+    educationInfoArray.map((object)=>{
+      if(!(object.id == id)){
+        array.push(object);
       }
-    }));
+    });
+    setEducationInfo(array);
   }
 
 
@@ -114,7 +117,7 @@ function App() {
                         // handlePersonalInfoChange={handlePersonalInfoChange}
                         // handleWorkHistoryInfoChange={handleWorkHistoryInfoChange}
                         // handleEducationInfoChange={handleEducationInfoChange}
-                        logCV = {()=>console.log(CV)}
+                        // logCV = {()=>console.log(CV)}
                         // CV={CV}
                         personalInfoObject={personalInfoObject}
                         workHistoryInfoArray={workHistoryInfoArray}

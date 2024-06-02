@@ -61,7 +61,7 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
     }
 
     const workHistoryAddNew = () =>{
-        workHistoryAdd(new WorkHistoryInfo());
+        workHistoryAdd(new WorkHistoryInfo("","","","","",""));
     }
 
     const workHistoryDeleteNew = (id) => {
@@ -105,12 +105,12 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                                             workHistoryInfoChange({...object,endDate: e.target.value});
                                         }} value={`${object.endDate}`}></input>
                                     </div>
-                                    <button type="button" onClick={workHistoryDeleteNew(object.id)}>Delete</button>
+                                    <button type="button" onClick={() => {workHistoryDeleteNew(object.id)}}>Delete</button>
                                 </form>
                             )
                         })
                     }
-            <button className="addButton" type="button" onClick={workHistoryAddNew()}>+</button>
+            <button className="addButton" type="button" onClick={workHistoryAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitWorkHistory} >Next</button>
         </div>
 
@@ -125,7 +125,7 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
     }
 
     const educationAddNew = () => {
-        educationAdd(new EducationInfo());
+        educationAdd(new EducationInfo("","","","","","",""));
     }
 
     const educationDeleteNew = (id) => {
@@ -168,12 +168,12 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
                                     educationInfoChange({...object,endDate : e.target.value});
                                 }} value={`${object.endDate}`}></input>
                             </div>
-                            <button type="button" onClick={educationDeleteNew(object.id)}>Delete</button>
+                            <button type="button" onClick={() => {educationDeleteNew(object.id)}}>Delete</button>
                         </form>
                     )
                 })
             }
-            <button className="addButton" type="button" onClick={educationAddNew()}>+</button>
+            <button className="addButton" type="button" onClick={educationAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitEducationInfo} >Create</button>
 
         </div>
@@ -193,7 +193,7 @@ function CreateForm(props){
            handleEducationInfoDelete,
            personalInfoObject,
            workHistoryInfoArray,
-           educationInfoArray, logCV, set} = props;
+           educationInfoArray, set} = props;
 
     const [activeForm, setActiveForm] = useState(0);
     const personalInfoChange = (data)=>{
@@ -234,7 +234,7 @@ function CreateForm(props){
             {
                 activeForm === 0 ? <PersonalInfoComponent personalInfo={personalInfoObject} personalInfoChange = {personalInfoChange}  onNext={() =>setActiveForm(1)}></PersonalInfoComponent> 
              :  activeForm === 1 ? <WorkHistory workHistoryInfo={workHistoryInfoArray} workHistoryInfoChange = {workHistoryInfoChange} workHistoryAdd={workHistorySave} workHistoryDelete={workHistoryDelete}  onNext={() => setActiveForm(2)}></WorkHistory> 
-             :  activeForm === 2 ? <Education educationInfo={educationInfoArray} educationInfoChange = {educationInfoChange} educationAdd={educationSave} educationDelete={educationDelete} onNext={() => {logCV(); setActiveForm(3); setPage()}}></Education>
+             :  activeForm === 2 ? <Education educationInfo={educationInfoArray} educationInfoChange = {educationInfoChange} educationAdd={educationSave} educationDelete={educationDelete} onNext={() => {setActiveForm(3); setPage()}}></Education>
              :  activeForm === 3 ? <></> : null
             
             }

@@ -40,7 +40,7 @@ function App() {
   const handleWorkHistoryInfoObjectChange = (workHistoryInfoData, id) =>{
     setWorkHistoryInfo(workHistoryInfoArray.map(object =>{
         if(object.id === id) {
-            return {...object, data: workHistoryInfoData}
+            return workHistoryInfoData;
         } else {
             return object;
         }
@@ -66,7 +66,7 @@ function App() {
   const handleEducationInfoObjectChange = (educationInfoData, id) =>{
     setEducationInfo(educationInfoArray.map(object =>{
         if(object.id === id) {
-            return {...object, data: educationInfoData}
+            return educationInfoData
         } else {
             return object;
         }

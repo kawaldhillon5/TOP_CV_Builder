@@ -78,15 +78,15 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                                     <div className="workTitle inputDiv">
                                         <label htmlFor={`title${object.id}`}>Job Title</label>
                                         <input id={`title${object.id}`} type = "text" required onChange={(e) => {
-                                            workHistoryInfoChange({...object, title: e.target.value})
+                                            workHistoryInfoChange({...object, title: e.target.value}, object.id)
                                         }} value={`${object.title}`}></input>
                                     </div>
 
                                     <div className="workCompany inputDiv">
                                         <label htmlFor={`companyName${object.id}`}>Company Name</label>
                                         <input id={`companyName${object.id}`} type="text"required onChange={(e) =>{
-                                            workHistoryInfoChange({...object,companyName: e.target.value});
-                                        }} value={`${object.comapnyName}`} ></input>
+                                            workHistoryInfoChange({...object,companyName: e.target.value},object.id);
+                                        }} value={`${object.companyName}`} ></input>
                                     </div>
                                     
 
@@ -94,7 +94,7 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                                     <div className="workStart inputDiv">
                                         <label htmlFor={`startDate${object.id}`}>Start Date</label>
                                         <input id={`startDate${object.id}`} type= "date" required onChange={(e) =>{
-                                            workHistoryInfoChange({...object,startDate: e.target.value});
+                                            workHistoryInfoChange({...object,startDate: e.target.value},object.id);
                                         }} value={`${object.startDate}`}></input>
                                     </div>
 
@@ -102,7 +102,7 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                                     <div className="workEnd inputDiv">
                                         <label htmlFor={`endDate${object.id}`}>End Date</label>
                                         <input id={`endDate${object.id}`}type="date" required onChange={(e) => {
-                                            workHistoryInfoChange({...object,endDate: e.target.value});
+                                            workHistoryInfoChange({...object,endDate: e.target.value},object.id);
                                         }} value={`${object.endDate}`}></input>
                                     </div>
                                     <button type="button" onClick={() => {workHistoryDeleteNew(object.id)}}>Delete</button>
@@ -142,14 +142,14 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
                             <div className="educationName inputDiv">
                                 <label htmlFor={`name${object.id}`}>Programe Name</label>
                                 <input id={`name${object.id}`} type="text"required onChange={(e) =>{
-                                    educationInfoChange({...object,programeName : e.target.value});
+                                    educationInfoChange({...object,programeName : e.target.value},object.id);
                                 }} value={`${object.programeName}`}></input>
                             </div>
                             
                             <div className="educationInstitution inputDiv">
                                 <label htmlFor={`institution${object.id}`}>Institution Name</label>
                                 <input id={`institution${object.id}`} type = "text" required onChange={(e) =>{
-                                    educationInfoChange({...object,institutionName : e.target.value});
+                                    educationInfoChange({...object,institutionName : e.target.value},object.id);
                                 }} value={`${object.institutionName}`}></input>
                             </div>
 
@@ -157,7 +157,7 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
                             <div className="educationStart inputDiv">
                                 <label htmlFor={`startDate${object.id}`}>Start Date</label>
                                 <input id={`startDate${object.id}`} type= "date" required onChange={(e) =>{
-                                    educationInfoChange({...object,startDate : e.target.value});
+                                    educationInfoChange({...object,startDate : e.target.value},object.id);
                                 }}value={`${object.startDate}`}></input>
                             </div>
 
@@ -165,7 +165,7 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
                             <div className="educationEnd inputDiv">
                                 <label htmlFor={`endDate${object.id}`}>End Date</label>
                                 <input id={`endDate${object.id}`} type="date" required onChange={(e) =>{
-                                    educationInfoChange({...object,endDate : e.target.value});
+                                    educationInfoChange({...object,endDate : e.target.value},object.id);
                                 }} value={`${object.endDate}`}></input>
                             </div>
                             <button type="button" onClick={() => {educationDeleteNew(object.id)}}>Delete</button>

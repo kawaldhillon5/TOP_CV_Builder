@@ -1,0 +1,32 @@
+.div_container {
+    width: 50vh;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    overflow: hidden;
+
+}
+
+.radio_buttons_all{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.radio_label {
+    margin: 20px;
+    width: auto;
+    display: flex;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio_label label {
+    height: 10px;
+    width: 10px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+

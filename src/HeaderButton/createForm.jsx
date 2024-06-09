@@ -64,11 +64,12 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
 
     const workHistoryAddNew = () =>{
         workHistoryAdd(new WorkHistoryInfo("","","","","",""));
+        setSelected(workHistoryInfo.length)
     }
 
     const workHistoryDeleteNew = (id) => {
         if(id === workHistoryInfo[workHistoryInfo.length -1].id){
-            setSelected(slider.leftFnc(0));
+            setSelected(slider.leftFnc(0, true));
         }
         workHistoryDelete(id);
     }
@@ -77,7 +78,6 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
 
         <div className="formDiv ">
             <h4>Work History</h4>
-                        <div className="div_container">
                             {workHistoryInfo.map((object, i) =>{
                                 if(i===selected){
                                     return (
@@ -116,13 +116,12 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                                     }
                                 })
                             }
-                        </div>
             <div className="radio_buttons_all">
-                <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0))}}>⇐</button>
+                <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0, true))}}>⇐</button>
                 <div className="radio_label">
-                    {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===0) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
+                    {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===selected) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
                 </div>
-                <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(workHistoryInfo.length-1))}}>⇒</button>
+                <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(workHistoryInfo.length-1, true))}}>⇒</button>
             </div>
             <button className="addButton" type="button" onClick={workHistoryAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitWorkHistory} >Next</button>
@@ -132,6 +131,8 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
 
 function Education({educationInfo ,educationInfoChange, educationAdd, educationDelete, onNext}){
 
+    const [selected, setSelected] = useState(0);
+    const slider = new Slider();
     function submitEducationInfo(){
         
         onNext();
@@ -139,9 +140,13 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
 
     const educationAddNew = () => {
         educationAdd(new EducationInfo("","","","","","",""));
+        setSelected(educationInfo.length)
     }
 
     const educationDeleteNew = (id) => {
+        if(id === educationInfo[educationInfo.length -1].id){
+            setSelected(slider.leftFnc(0, false));
+        }
         educationDelete(id);
     }
 
@@ -149,43 +154,53 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
 
         <div className="formDiv">
             <h4>Education</h4>
-            {   educationInfo.map((object) => {
-                    return (
-                        <form className="educationInfoForm">
-                            <div className="educationName inputDiv">
-                                <label htmlFor={`name${object.id}`}>Programe Name</label>
-                                <input id={`name${object.id}`} type="text"required onChange={(e) =>{
-                                    educationInfoChange({...object,programeName : e.target.value},object.id);
-                                }} value={`${object.programeName}`}></input>
-                            </div>
-                            
-                            <div className="educationInstitution inputDiv">
-                                <label htmlFor={`institution${object.id}`}>Institution Name</label>
-                                <input id={`institution${object.id}`} type = "text" required onChange={(e) =>{
-                                    educationInfoChange({...object,institutionName : e.target.value},object.id);
-                                }} value={`${object.institutionName}`}></input>
-                            </div>
+            {   educationInfo.map((object,i) => {
+                    if(i === selected){
+                        return (
+                            <form className="educationInfoForm" id={`${i}`}>
+                                <input className="radio_button" type="radio" name ="radio_btn" id = {`r${i}`}checked></input>
+                                <div className="educationName inputDiv">
+                                    <label htmlFor={`name${object.id}`}>Programe Name</label>
+                                    <input id={`name${object.id}`} type="text"required onChange={(e) =>{
+                                        educationInfoChange({...object,programeName : e.target.value},object.id);
+                                    }} value={`${object.programeName}`}></input>
+                                </div>
+                                
+                                <div className="educationInstitution inputDiv">
+                                    <label htmlFor={`institution${object.id}`}>Institution Name</label>
+                                    <input id={`institution${object.id}`} type = "text" required onChange={(e) =>{
+                                        educationInfoChange({...object,institutionName : e.target.value},object.id);
+                                    }} value={`${object.institutionName}`}></input>
+                                </div>
 
-                            
-                            <div className="educationStart inputDiv">
-                                <label htmlFor={`startDate${object.id}`}>Start Date</label>
-                                <input id={`startDate${object.id}`} type= "date" required onChange={(e) =>{
-                                    educationInfoChange({...object,startDate : e.target.value},object.id);
-                                }}value={`${object.startDate}`}></input>
-                            </div>
+                                
+                                <div className="educationStart inputDiv">
+                                    <label htmlFor={`startDate${object.id}`}>Start Date</label>
+                                    <input id={`startDate${object.id}`} type= "date" required onChange={(e) =>{
+                                        educationInfoChange({...object,startDate : e.target.value},object.id);
+                                    }}value={`${object.startDate}`}></input>
+                                </div>
 
-                            
-                            <div className="educationEnd inputDiv">
-                                <label htmlFor={`endDate${object.id}`}>End Date</label>
-                                <input id={`endDate${object.id}`} type="date" required onChange={(e) =>{
-                                    educationInfoChange({...object,endDate : e.target.value},object.id);
-                                }} value={`${object.endDate}`}></input>
-                            </div>
-                            <button type="button" onClick={() => {educationDeleteNew(object.id)}}>Delete</button>
-                        </form>
-                    )
+                                
+                                <div className="educationEnd inputDiv">
+                                    <label htmlFor={`endDate${object.id}`}>End Date</label>
+                                    <input id={`endDate${object.id}`} type="date" required onChange={(e) =>{
+                                        educationInfoChange({...object,endDate : e.target.value},object.id);
+                                    }} value={`${object.endDate}`}></input>
+                                </div>
+                                <button type="button" onClick={() => {educationDeleteNew(object.id)}}>Delete</button>
+                            </form>
+                        )
+                    }
                 })
             }
+            <div className="radio_buttons_all">
+                <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0, false))}}>⇐</button>
+                <div className="radio_label">
+                    {educationInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===selected) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
+                </div>
+                <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(educationInfo.length-1, false))}}>⇒</button>
+            </div>
             <button className="addButton" type="button" onClick={educationAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitEducationInfo} >Create</button>
 

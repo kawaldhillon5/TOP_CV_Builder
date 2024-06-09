@@ -134,7 +134,7 @@ function App() {
 
                     </CustomizeForm>: null}
                 </buttoncontent>
-                {/* <CvPreview CV={personalInfoObject, workHistoryInfoArray, educationInfoArray}></CvPreview> */}
+                <CvPreview CV={{personalInfoObject, workHistoryInfoArray, educationInfoArray}}></CvPreview>
             </div>
         </page> 
     )

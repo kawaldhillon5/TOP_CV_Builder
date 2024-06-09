@@ -67,6 +67,9 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
     }
 
     const workHistoryDeleteNew = (id) => {
+        if(id === workHistoryInfo[workHistoryInfo.length -1].id){
+            setSelected(slider.leftFnc(0));
+        }
         workHistoryDelete(id);
     }
 
@@ -78,7 +81,7 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                             {workHistoryInfo.map((object, i) =>{
                                 if(i===selected){
                                     return (
-                                                <form className="workInfoForm" id={`form${i}`}>
+                                                <form className="workInfoForm" id={`${i}`}>
                                                     <input className="radio_button" type="radio" name ="radio_btn" id = {`r${i}`}checked></input>
                                                     <div className="workTitle inputDiv">
                                                         <label htmlFor={`title${object.id}`}>Job Title</label>
@@ -117,14 +120,13 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
             <div className="radio_buttons_all">
                 <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0))}}>⇐</button>
                 <div className="radio_label">
-                    {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`}></label>})}
+                    {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===0) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
                 </div>
                 <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(workHistoryInfo.length-1))}}>⇒</button>
             </div>
             <button className="addButton" type="button" onClick={workHistoryAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitWorkHistory} >Next</button>
         </div>
-
     )
 }
 

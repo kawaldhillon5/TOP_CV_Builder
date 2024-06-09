@@ -3,21 +3,14 @@ import "./slider.css"
 export default class Slider {
 
     radioCheck = function() {
-        let checkedId;
-        document.querySelectorAll(".radio_button").forEach((elm,j)  => {
-            if(elm.checked) {
-                elm.removeAttribute("checked");
-                checkedId = Number(j);
-            }
-            
-        });
-        return checkedId;
+       return Number(document.querySelector(".workInfoForm").id);
     }
     
     leftFnc = function(first) {
         let checkedId = this.radioCheck();
         if(checkedId == first) {
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "black";
+            return checkedId
         } else {
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "white";
             document.querySelector(`.labelr${checkedId - 1}`).style.backgroundColor = "black"
@@ -29,6 +22,7 @@ export default class Slider {
         let checkedId = this.radioCheck();
         if(checkedId == last) {
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "black";
+            return checkedId
         } else {
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "white";
             document.querySelector(`.labelr${checkedId + 1}`).style.backgroundColor = "black";

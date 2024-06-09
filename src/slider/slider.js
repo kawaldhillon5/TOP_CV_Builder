@@ -7,7 +7,7 @@ export default class Slider {
         document.querySelectorAll(".radio_button").forEach((elm,j)  => {
             if(elm.checked) {
                 elm.removeAttribute("checked");
-                checkedId = Number(j + 1);
+                checkedId = Number(j);
             }
             
         });
@@ -15,26 +15,24 @@ export default class Slider {
     }
     
     leftFnc = function(first) {
-        let checkedId = radioCheck();
+        let checkedId = this.radioCheck();
         if(checkedId == first) {
-            document.querySelector(`#r${checkedId}`).setAttribute("checked","checked");
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "black";
         } else {
-            document.querySelector(`#r${checkedId - 1}`).setAttribute("checked","checked");
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "white";
             document.querySelector(`.labelr${checkedId - 1}`).style.backgroundColor = "black"
+            return checkedId-1;
         }
     }
 
     rightFnc = function(last) {
-        let checkedId = radioCheck();
+        let checkedId = this.radioCheck();
         if(checkedId == last) {
-            document.querySelector(`#r${checkedId}`).setAttribute("checked","checked");
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "black";
         } else {
-            document.querySelector(`#r${checkedId + 1}`).setAttribute("checked","checked");
             document.querySelector(`.labelr${checkedId}`).style.backgroundColor = "white";
             document.querySelector(`.labelr${checkedId + 1}`).style.backgroundColor = "black";
+            return checkedId+1;
         }
     }
 

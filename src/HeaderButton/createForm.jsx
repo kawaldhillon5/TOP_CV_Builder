@@ -54,6 +54,8 @@ function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
 function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, workHistoryDelete, onNext}){
 
+    const [selected, setSelected] = useState(0);
+
     const slider = new Slider();
     function submitWorkHistory(){
         onNext();
@@ -74,48 +76,50 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
             <h4>Work History</h4>
                         <div className="div_container">
                             {workHistoryInfo.map((object, i) =>{
-                                return (
-                                            <form className="workInfoForm">
-                                                <input class="radio_button" type="radio" name ="radio_btn" id = {`r${i}`}checked={i===0}></input>
-                                                <div className="workTitle inputDiv">
-                                                    <label htmlFor={`title${object.id}`}>Job Title</label>
-                                                    <input id={`title${object.id}`} type = "text" required onChange={(e) => {
-                                                        workHistoryInfoChange({...object, title: e.target.value}, object.id)
-                                                    }} value={`${object.title}`}></input>
-                                                </div>
-                                                <div className="workCompany inputDiv">
-                                                    <label htmlFor={`companyName${object.id}`}>Company Name</label>
-                                                    <input id={`companyName${object.id}`} type="text"required onChange={(e) =>{
-                                                        workHistoryInfoChange({...object,companyName: e.target.value},object.id);
-                                                    }} value={`${object.companyName}`} ></input>
-                                                </div>
-                            
-                            
-                                                <div className="workStart inputDiv">
-                                                    <label htmlFor={`startDate${object.id}`}>Start Date</label>
-                                                    <input id={`startDate${object.id}`} type= "date" required onChange={(e) =>{
-                                                        workHistoryInfoChange({...object,startDate: e.target.value},object.id);
-                                                    }} value={`${object.startDate}`}></input>
-                                                </div>
-                            
-                                                <div className="workEnd inputDiv">
-                                                    <label htmlFor={`endDate${object.id}`}>End Date</label>
-                                                    <input id={`endDate${object.id}`}type="date" required onChange={(e) => {
-                                                        workHistoryInfoChange({...object,endDate: e.target.value},object.id);
-                                                    }} value={`${object.endDate}`}></input>
-                                                </div>
-                                                <button type="button" onClick={() => {workHistoryDeleteNew(object.id)}}>Delete</button>
-                                        </form>
-                                    )
+                                if(i===selected){
+                                    return (
+                                                <form className="workInfoForm" id={`form${i}`}>
+                                                    <input className="radio_button" type="radio" name ="radio_btn" id = {`r${i}`}checked></input>
+                                                    <div className="workTitle inputDiv">
+                                                        <label htmlFor={`title${object.id}`}>Job Title</label>
+                                                        <input id={`title${object.id}`} type = "text" required onChange={(e) => {
+                                                            workHistoryInfoChange({...object, title: e.target.value}, object.id)
+                                                        }} value={`${object.title}`}></input>
+                                                    </div>
+                                                    <div className="workCompany inputDiv">
+                                                        <label htmlFor={`companyName${object.id}`}>Company Name</label>
+                                                        <input id={`companyName${object.id}`} type="text"required onChange={(e) =>{
+                                                            workHistoryInfoChange({...object,companyName: e.target.value},object.id);
+                                                        }} value={`${object.companyName}`} ></input>
+                                                    </div>
+                                
+                                
+                                                    <div className="workStart inputDiv">
+                                                        <label htmlFor={`startDate${object.id}`}>Start Date</label>
+                                                        <input id={`startDate${object.id}`} type= "date" required onChange={(e) =>{
+                                                            workHistoryInfoChange({...object,startDate: e.target.value},object.id);
+                                                        }} value={`${object.startDate}`}></input>
+                                                    </div>
+                                
+                                                    <div className="workEnd inputDiv">
+                                                        <label htmlFor={`endDate${object.id}`}>End Date</label>
+                                                        <input id={`endDate${object.id}`}type="date" required onChange={(e) => {
+                                                            workHistoryInfoChange({...object,endDate: e.target.value},object.id);
+                                                        }} value={`${object.endDate}`}></input>
+                                                    </div>
+                                                    <button type="button" onClick={() => {workHistoryDeleteNew(object.id)}}>Delete</button>
+                                                </form>
+                                        )
+                                    }
                                 })
                             }
                         </div>
             <div className="radio_buttons_all">
-                <button id="left_slide_button">⇐</button>
+                <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0))}}>⇐</button>
                 <div className="radio_label">
-                    {workHistoryInfo.map((object, i) =>{return <label class= {`labelr${i}`} for={`r${i}`}></label>})}
+                    {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`}></label>})}
                 </div>
-                <button id="right_slide_button">⇒</button>
+                <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(workHistoryInfo.length-1))}}>⇒</button>
             </div>
             <button className="addButton" type="button" onClick={workHistoryAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitWorkHistory} >Next</button>

@@ -57,7 +57,7 @@ function App() {
     const array = [];
     workHistoryInfoArray.map(object =>{
       if(!(object.id == id)){
-        return object;
+        array.push(object);
       }
     });
     setWorkHistoryInfo(array);

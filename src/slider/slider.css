@@ -30,3 +30,37 @@
     border-radius: 50%;
 }
 
+#left_slide_button, #right_slide_button {
+    background-color: white ;
+    border: none;
+    font-size: 30px;
+}
+
+.addButton {
+    background-color: rgb(202, 229, 248);
+    border: 1px solid black;
+    width: 5vh;
+    border-radius: 20px;
+    font-size: 30px;
+    
+}
+
+.deleteButton {
+    background-color: rgb(255, 254, 254);
+    width: 3vh;
+    height: 3vh;
+    margin-left: auto;
+}
+
+.deleteButton, .addButton, #left-slide_button, #rigth_slide_button, .nextButton, .headerButton  {
+    transition: transform, 150ms;
+}
+
+.deleteButton:hover, .addButton:hover, #left_slide_button:hover, #right_slide_button:hover, .nextButton:hover, .headerButton:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.radio_button {
+    display: none;
+}

@@ -30,3 +30,7 @@ input{
     background-color: rgb(255, 255, 255);
     margin-left: auto;
 }
+
+.deleteButton :hover {
+    transform: scale(1.2);
+}

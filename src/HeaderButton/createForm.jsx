@@ -3,6 +3,7 @@ import Slider from "../slider/slider";
 import WorkHistoryInfo from "../CV-Class/workHistoryInfo-class";
 import EducationInfo from "../CV-Class/educationInfo_class";
 import "./createForm.css"
+import imgUrl from "./file.png"
 
 function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
@@ -12,7 +13,7 @@ function PersonalInfoComponent({personalInfo, personalInfoChange, onNext}){
 
     return (
 
-        <div className="formsDiv">
+        <div className="formDiv">
             <h2>Personal Info</h2>
             <form className="personalInfoForm">
                     <div className="nameInput inputDiv">
@@ -110,19 +111,22 @@ function WorkHistory({workHistoryInfo ,workHistoryInfoChange, workHistoryAdd, wo
                                                             workHistoryInfoChange({...object,endDate: e.target.value},object.id);
                                                         }} value={`${object.endDate}`}></input>
                                                     </div>
-                                                    <button type="button" onClick={() => {workHistoryDeleteNew(object.id)}}>Delete</button>
+                                                    <img src={imgUrl} className="deleteButton" onClick={() => {workHistoryDeleteNew(object.id)}}></img>
                                                 </form>
                                         )
                                     }
                                 })
                             }
-            <div className="radio_buttons_all">
-                <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0, true))}}>⇐</button>
-                <div className="radio_label">
-                    {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===selected) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
+            {(workHistoryInfo[0]) ? (
+                <div className="radio_buttons_all">
+                    <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0, true))}}>⇐</button>
+                    <div className="radio_label">
+                        {workHistoryInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===selected) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
+                    </div>
+                    <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(workHistoryInfo.length-1, true))}}>⇒</button>
                 </div>
-                <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(workHistoryInfo.length-1, true))}}>⇒</button>
-            </div>
+                ) : null
+            }
             <button className="addButton" type="button" onClick={workHistoryAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitWorkHistory} >Next</button>
         </div>
@@ -188,19 +192,21 @@ function Education({educationInfo ,educationInfoChange, educationAdd, educationD
                                         educationInfoChange({...object,endDate : e.target.value},object.id);
                                     }} value={`${object.endDate}`}></input>
                                 </div>
-                                <button type="button" onClick={() => {educationDeleteNew(object.id)}}>Delete</button>
+                                <img src={imgUrl} className="deleteButton" onClick={() => {workHistoryDeleteNew(object.id)}}></img>
                             </form>
                         )
                     }
                 })
             }
-            <div className="radio_buttons_all">
-                <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0, false))}}>⇐</button>
-                <div className="radio_label">
-                    {educationInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===selected) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
-                </div>
-                <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(educationInfo.length-1, false))}}>⇒</button>
-            </div>
+            { (educationInfo[0]) ?
+                (<div className="radio_buttons_all">
+                    <button id="left_slide_button" onClick={()=>{setSelected(slider.leftFnc(0, false))}}>⇐</button>
+                    <div className="radio_label">
+                        {educationInfo.map((object, i) =>{return <label className= {`labelr${i}`} htmlFor={`r${i}`} style={(i===selected) ? ({backgroundColor: "black"}): ({backgroundColor: "white"})}></label>})}
+                    </div>
+                    <button id="right_slide_button" onClick={()=>{setSelected(slider.rightFnc(educationInfo.length-1, false))}}>⇒</button>
+                </div>) : null
+            }
             <button className="addButton" type="button" onClick={educationAddNew}>+</button>
             <button className="nextButton" type="button" onClick={submitEducationInfo} >Create</button>
 
